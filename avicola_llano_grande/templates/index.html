@@ -1,0 +1,49 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Avícola Llano Grande - Inicio</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f8ff;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #2d3436;
+        }
+        .menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+            background-color: #0984e3;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 18px;
+            transition: background-color 0.3s;
+            width: 250px;
+        }
+        a:hover {
+            background-color: #74b9ff;
+        }
+    </style>
+</head>
+<body>
+    <h1>🐔 Avícola Llano Grande S.A.S 🥚</h1>
+    <h2>Bienvenido al sistema de gestión</h2>
+
+    <div class="menu">
+        <a href="/registro">Registrar huevos</a>
+        <a href="/stock">Ver stock</a>
+        <a href="/venta">Realizar venta</a>
+    </div>
+</body>
+</html>
