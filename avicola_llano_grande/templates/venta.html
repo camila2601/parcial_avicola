@@ -32,18 +32,35 @@
             color: red;
         }
     </style>
+    <script>
+        // Actualizar las opciones de unidad según el tipo de cliente
+        function actualizarOpciones() {
+            const cliente = document.querySelector("select[name='cliente']").value;
+            const unidadSelect = document.getElementById("unidad");
+
+            // Limpiar las opciones actuales
+            unidadSelect.innerHTML = "";
+
+            if (cliente === "NATURAL") {
+                unidadSelect.innerHTML += '<option value="DOCENA">Docena</option>';
+                unidadSelect.innerHTML += '<option value="CUBETA">Cubeta</option>';
+            } else if (cliente === "JURIDICO") {
+                unidadSelect.innerHTML += '<option value="CUBETA">Cubeta</option>';
+            }
+        }
+    </script>
 </head>
 <body>
     <h1>Realizar Venta</h1>
 
     <form method="POST" action="/venta">
-        <label>Tipo de huevo:</label><br>
+        <label for="tipo">Tipo de huevo:</label>
         <select name="tipo" required>
             <option value="ROJO">ROJO</option>
             <option value="BLANCO">BLANCO</option>
         </select><br>
 
-        <label>Tamaño:</label><br>
+        <label for="tamano">Tamaño:</label>
         <select name="tamano" required>
             <option value="A">A</option>
             <option value="AA">AA</option>
@@ -51,24 +68,34 @@
             <option value="EXTRA">EXTRA</option>
         </select><br>
 
-        <label>Tipo de cliente:</label><br>
-        <select name="cliente" required>
-            <option value="NATURAL">Natural</option>
-            <option value="JURIDICO">Jurídico</option>
+        <label for="cliente">Cliente:</label>
+        <select name="cliente" onchange="actualizarOpciones()" required>
+            <option value="NATURAL">NATURAL</option>
+            <option value="JURIDICO">JURIDICO</option>
         </select><br>
 
-        <label>Cantidad:</label><br>
+        <label for="unidad">Unidad:</label>
+        <select id="unidad" name="unidad" required>
+            <!-- Las opciones se actualizarán dinámicamente con JavaScript -->
+        </select><br>
+
+        <label for="cantidad">Cantidad:</label>
         <input type="number" name="cantidad" min="1" required><br>
 
-        <button type="submit">Vender</button>
+        <button type="submit">Realizar Venta</button>
     </form>
+
+    {% if archivo_pdf %}
+        <p>Factura generada:</p>
+        <a href="/factura/{{ archivo_pdf }}" target="_blank">Ver factura en PDF</a><br>
+    {% endif %}
+
+    {% if archivo_txt %}
+        <a href="/factura/{{ archivo_txt }}" target="_blank">Ver factura en TXT</a>
+    {% endif %}
 
     {% if mensaje %}
         <div class="mensaje">{{ mensaje }}</div>
-    {% endif %}
-
-    {% if archivo %}
-        <p>Factura generada: <strong>{{ archivo }}</strong></p>
     {% endif %}
 
     <br><br>

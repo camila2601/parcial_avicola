@@ -10,4 +10,4 @@ db = client['avicola_llano_grande']
 
 # Colecciones (tablas en NoSQL)
 stock_collection = db['stock']
-ventas_collection = db['ventas']
+
