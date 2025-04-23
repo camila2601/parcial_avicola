@@ -1,49 +1,179 @@
-<!-- templates/index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Avícola Llano Grande - Inicio</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #f0f8ff;
-            text-align: center;
-            padding: 50px;
-        }
-        h1 {
-            color: #2d3436;
-        }
-        .menu {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            margin-top: 30px;
-        }
-        a {
-            text-decoration: none;
-            color: white;
-            background-color: #0984e3;
-            padding: 15px 40px;
-            border-radius: 8px;
-            font-size: 18px;
-            transition: background-color 0.3s;
-            width: 250px;
-        }
-        a:hover {
-            background-color: #74b9ff;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Avícola Llano Grande - Inicio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #D4A017; /* Dorado como yema de huevo */
+      --secondary: #8B4513; /* Marrón como gallina */
+      --light: #FFF9E6; /* Fondo claro como clara de huevo */
+      --dark: #5C3A21;
+      --white: #ffffff;
+      --card-bg: rgba(255, 255, 255, 0.92);
+      --border-radius: 12px;
+      --box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url('https://media.canva.com/v2/image-resize/format:JPG/height:452/quality:92/uri:ifs%3A%2F%2F%2F936546fc-d9eb-4bdf-b7e0-93bc5e521ccd/watermark:F/width:800?csig=AAAAAAAAAAAAAAAAAAAAAC-W2MY1EyDXArz8VIj9foWXTHgrqYoAh0bulPIzCU-q&exp=1745454653&osig=AAAAAAAAAAAAAAAAAAAAAAHGRPJmHSEQD6NrM_vQb9nimddrlP3IGXEfW1e2fx9v&signer=media-rpc&x-canva-quality=screen') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      color: var(--dark);
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(255, 249, 230, 0.426);
+      z-index: -1;
+    }
+
+    .container {
+      text-align: center;
+      background-color: var(--card-bg);
+      padding: 40px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      max-width: 450px;
+      width: 90%;
+      border-top: 5px solid var(--primary);
+    }
+
+    .logo {
+      margin-bottom: 25px;
+      position: relative;
+    }
+
+    .logo::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: var(--primary);
+      margin: 15px auto 0;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      color: var(--secondary);
+      margin-bottom: 5px;
+      font-weight: 700;
+    }
+
+    h2 {
+      font-size: 1.1rem;
+      color: var(--dark);
+      font-weight: 400;
+      margin-bottom: 30px;
+    }
+
+    h3 {
+      font-size: 0.9rem;
+      color: var(--secondary);
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .menu a {
+      background-color: var(--primary);
+      color: var(--white);
+      padding: 15px;
+      border-radius: var(--border-radius);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .menu a:hover {
+      background-color: var(--secondary);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .menu a::before {
+      content: "";
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    .menu a:nth-child(1)::before {
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 2C8 2 4 6 4 10c0 8 8 12 8 12s8-4 8-12c0-4-4-8-8-8z"/></svg>');
+    }
+
+    .menu a:nth-child(2)::before {
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>');
+    }
+
+    .menu a:nth-child(3)::before {
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M17 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-3l1.4-2.8c.2-.3.5-.5.9-.5h6.3c.4 0 .7.2.9.5L17 15H7zm9-7c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM7 6c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/></svg>');
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 30px 20px;
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      h2 {
+        font-size: 1rem;
+      }
+      
+      .menu a {
+        font-size: 0.9rem;
+        padding: 12px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>🐔 Avícola Llano Grande S.A.S 🥚</h1>
-    <h2>Bienvenido al sistema de gestión</h2>
-
-    <div class="menu">
-        <a href="/registro">Registrar huevos</a>
-        <a href="/stock">Ver stock</a>
-        <a href="/venta">Realizar venta</a>
+  <div class="container">
+    <div class="logo">
+      <h1>AVÍCOLA LLANO GRANDE</h1>
+      <h3>S.A.S</h3>
     </div>
+    <h2>Bienvenido al sistema de gestión</h2>
+    <div class="menu">
+      <a href="/registro">Registrar huevos</a>
+      <a href="/stock">Ver stock</a>
+      <a href="/venta">Realizar venta</a>
+    </div>
+  </div>
 </body>
 </html>

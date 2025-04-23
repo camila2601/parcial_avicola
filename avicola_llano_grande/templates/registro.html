@@ -1,71 +1,225 @@
-<!-- templates/registro.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Huevos - Avícola Llano Grande</title>
     <style>
+        :root {
+            --primary-color: #d4a017; /* Dorado como yema de huevo */
+            --secondary-color: #8b4513; /* Marrón como gallina */
+            --light-color: #fff9e6; /* Fondo claro como clara de huevo */
+            --dark-color: #5c3a21;
+            --success-color: #4caf50;
+            --border-radius: 8px;
+            --box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f3f3f3;
-            padding: 40px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url("https://media.canva.com/v2/image-resize/format:JPG/height:452/quality:92/uri:ifs%3A%2F%2F%2Fe250bfdc-b1a2-42d2-b9e6-e883ab376339/watermark:F/width:800?csig=AAAAAAAAAAAAAAAAAAAAACa_3FvukvWkup5YU0ZwNiipnOd-h2VqOfv92dILuMrm&exp=1745453252&osig=AAAAAAAAAAAAAAAAAAAAAIZHkDcj2euQAB3VK4nOsNPpLc4IVmO29TB_YOOgGQNf&signer=media-rpc&x-canva-quality=screen") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: var(--dark-color);
+            position: relative;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 249, 230, 0.448);
+            z-index: 0;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            margin-bottom: 20px;
+            border-top: 4px solid var(--primary-color);
+        }
+        
+        h1 {
+            color: var(--secondary-color);
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 2rem;
+            position: relative;
+        }
+        
+        h1::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-color);
+            margin: 10px auto 0;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        
+        select, input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            transition: all 0.3s;
+            background-color: var(--light-color);
+        }
+        
+        select:focus, input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(212, 160, 23, 0.2);
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-volver {
+            display: inline-block;
+            background-color: white;
+            color: var(--secondary-color);
+            padding: 10px 25px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid var(--secondary-color);
+        }
+        
+        .btn-volver:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .mensaje {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: var(--border-radius);
+            font-weight: 600;
             text-align: center;
         }
-        form {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            display: inline-block;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        
+        .success {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: var(--success-color);
+            border: 1px solid var(--success-color);
         }
-        select, input[type=number], button {
-            padding: 10px;
-            margin: 10px;
-            width: 200px;
+        
+        .text-center {
+            text-align: center;
         }
-        .mensaje {
-            margin-top: 20px;
-            color: green;
-            font-weight: bold;
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Registrar Huevos</h1>
-
-    <form method="POST" action="/registro">
-        <label>Tipo:</label><br>
-        <select name="tipo" required>
-            <option value="ROJO">ROJO</option>
-            <option value="BLANCO">BLANCO</option>
-        </select><br>
-
-        <label>Tamaño:</label><br>
-        <select name="tamano" required>
-            <option value="A">A</option>
-            <option value="AA">AA</option>
-            <option value="B">B</option>
-            <option value="EXTRA">EXTRA</option>
-        </select><br>
-
-        <label>Cantidad de cubetas:</label><br>
-        <input type="number" name="cubetas" min="1" required><br>
-
-        <button type="submit">Registrar</button>
-    </form>
-
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="mensaje">
-                {% for message in messages %}
-                    <p>{{ message }}</p>
-                {% endfor %}
-            </div>
-        {% endif %}
-    {% endwith %}
-
-    <br><br>
-    <a href="/">Volver al inicio</a>
+    <div class="container">
+        <div class="card">
+            <h1>Registrar Huevos</h1>
+            
+            <form method="POST" action="/registro">
+                <div class="form-group">
+                    <label for="tipo">Tipo:</label>
+                    <select name="tipo" id="tipo" required>
+                        <option value="ROJO">ROJO</option>
+                        <option value="BLANCO">BLANCO</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tamano">Tamaño:</label>
+                    <select name="tamano" id="tamano" required>
+                        <option value="A">A</option>
+                        <option value="AA">AA</option>
+                        <option value="B">B</option>
+                        <option value="EXTRA">EXTRA</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cubetas">Cantidad de cubetas:</label>
+                    <input type="number" name="cubetas" id="cubetas" min="1" required>
+                </div>
+                
+                <button type="submit" class="btn">Registrar</button>
+            </form>
+            
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="mensaje success">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+        
+        <div class="text-center">
+            <a href="/" class="btn-volver">Volver al inicio</a>
+        </div>
+    </div>
 </body>
 </html>
-

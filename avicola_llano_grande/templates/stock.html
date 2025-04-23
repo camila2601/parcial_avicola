@@ -1,63 +1,173 @@
-<!-- templates/stock.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Stock de Huevos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock de Huevos - Avícola</title>
     <style>
+        :root {
+            --primary-color: #d4a017; /* Dorado como yema de huevo */
+            --secondary-color: #8b4513; /* Marrón como gallina */
+            --light-color: #fff9e6; /* Fondo claro como clara de huevo */
+            --dark-color: #5c3a21;
+            --success-color: #4caf50;
+            --border-radius: 6px;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
             padding: 40px;
-            background-color: #f0f0f0;
-            text-align: center;
+            min-height: 100vh;
+            background-image: url('https://media.canva.com/v2/image-resize/format:JPG/height:452/quality:92/uri:ifs%3A%2F%2F%2Fe250bfdc-b1a2-42d2-b9e6-e883ab376339/watermark:F/width:800?csig=AAAAAAAAAAAAAAAAAAAAACa_3FvukvWkup5YU0ZwNiipnOd-h2VqOfv92dILuMrm&exp=1745453252&osig=AAAAAAAAAAAAAAAAAAAAAIZHkDcj2euQAB3VK4nOsNPpLc4IVmO29TB_YOOgGQNf&signer=media-rpc&x-canva-quality=screen');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            color: var(--dark-color);
         }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 249, 230, 0.474);
+            z-index: 0;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            color: var(--secondary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        h1::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--primary-color);
+            margin: 10px auto 0;
+        }
+        
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
         table {
-            margin: auto;
+            width: 100%;
             border-collapse: collapse;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            font-size: 0.95rem;
         }
+        
         th, td {
-            padding: 12px 20px;
-            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
         }
+        
         th {
-            background-color: #2c3e50;
+            background-color: var(--secondary-color);
             color: white;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
-        td {
+        
+        tr:nth-child(even) {
+            background-color: var(--light-color);
+        }
+        
+        tr:hover {
+            background-color: rgba(212, 160, 23, 0.1);
+        }
+        
+        .btn-volver {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 25px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .btn-volver:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .text-center {
             text-align: center;
         }
-        a {
-            display: inline-block;
-            margin-top: 20px;
-            text-decoration: none;
-            color: #2980b9;
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            th, td {
+                padding: 10px;
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Stock Actual de Huevos</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Tipo</th>
-                <th>Tamaño</th>
-                <th>Cantidad de Huevos</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in stock %}
-            <tr>
-                <td>{{ item.tipo }}</td>
-                <td>{{ item.tamano }}</td>
-                <td>{{ item.cantidad }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="/">Volver al inicio</a>
+    <div class="container">
+        <div class="card">
+            <h1>Stock Actual de Huevos</h1>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Tamaño</th>
+                        <th>Cantidad de Huevos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in stock %}
+                    <tr>
+                        <td>{{ item.tipo }}</td>
+                        <td>{{ item.tamano }}</td>
+                        <td>{{ item.cantidad }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="text-center">
+            <a href="/" class="btn-volver">Volver al inicio</a>
+        </div>
+    </div>
 </body>
 </html>

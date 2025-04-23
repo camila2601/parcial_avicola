@@ -1,46 +1,205 @@
-<!-- templates/venta.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Realizar Venta - Avícola Llano Grande</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venta de Huevos - Avícola</title>
     <style>
+        :root {
+            --primary-color: #d4a017; 
+            --secondary-color: #8b4513; 
+            --light-color: #fff9e6; 
+            --dark-color: #5c3a21;
+            --success-color: #4caf50;
+            --error-color: #f44336;
+            --border-radius: 6px;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            padding: 40px;
-            background-color: #f7f7f7;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('https://media.canva.com/v2/image-resize/format:JPG/height:452/quality:92/uri:ifs%3A%2F%2F%2Fe250bfdc-b1a2-42d2-b9e6-e883ab376339/watermark:F/width:800?csig=AAAAAAAAAAAAAAAAAAAAACa_3FvukvWkup5YU0ZwNiipnOd-h2VqOfv92dILuMrm&exp=1745453252&osig=AAAAAAAAAAAAAAAAAAAAAIZHkDcj2euQAB3VK4nOsNPpLc4IVmO29TB_YOOgGQNf&signer=media-rpc&x-canva-quality=screen');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 249, 230, 0.374);
+            z-index: 0;
+        }
+        
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            padding: 25px;
+            width: 100%;
+            max-width: 350px;
+            border-top: 5px solid var(--primary-color);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 40px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23d4a017"><path d="M12 2C8 2 4 6 4 10c0 8 8 12 8 12s8-4 8-12c0-4-4-8-8-8z"/></svg>');
+            background-repeat: no-repeat;
+            opacity: 0.3;
+        }
+        
+        h1 {
+            color: var(--secondary-color);
+            text-align: center;
+            margin: 0 0 20px 0;
+            font-size: 1.5rem;
+            position: relative;
+        }
+        
+        h1::after {
+            content: "";
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-color);
+            margin: 8px auto 0;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: var(--dark-color);
+            font-weight: 500;
+        }
+        
+        select, input[type="number"] {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            background-color: #fff;
+            box-sizing: border-box;
+        }
+        
+        select:focus, input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(212, 160, 23, 0.2);
+        }
+        
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 0.9rem;
+            width: 100%;
+            font-weight: 600;
+            transition: all 0.2s;
+            margin-top: 5px;
+        }
+        
+        .btn:hover {
+            background-color: #c19114;
+            transform: translateY(-1px);
+        }
+        
+            .btn-secondary {
+        background-color: var(--secondary-color);
+        color: white;
+        text-decoration: none;
+        border: none;
+        border-radius: var(--border-radius);
+        padding: 8px 16px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        display: block; 
+        width: fit-content; 
+        margin: 15px auto 0; 
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+        
+        .btn-secondary:hover {
+            background-color: #7a3b11;
+        }
+        
+        .mensaje {
+            padding: 10px;
+            margin: 15px 0 0;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
             text-align: center;
         }
-        form {
-            background: white;
-            display: inline-block;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        
+        .success {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--success-color);
+            border: 1px solid var(--success-color);
         }
-        select, input[type=number], button {
-            padding: 10px;
-            margin: 10px;
-            width: 220px;
-        }
-        .mensaje {
-            margin-top: 20px;
-            color: green;
-            font-weight: bold;
-        }
+        
         .error {
-            color: red;
+            background-color: rgba(244, 67, 54, 0.1);
+            color: var(--error-color);
+            border: 1px solid var(--error-color);
+        }
+        
+        .factura-links {
+            margin-top: 15px;
+            text-align: center;
+        }
+        
+        .factura-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin: 0 5px;
+            font-weight: 500;
+            border: 1px solid var(--primary-color);
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        
+        .factura-link:hover {
+            background-color: var(--primary-color);
+            color: white;
         }
     </style>
     <script>
-        // Actualizar las opciones de unidad según el tipo de cliente
         function actualizarOpciones() {
             const cliente = document.querySelector("select[name='cliente']").value;
             const unidadSelect = document.getElementById("unidad");
-
-            // Limpiar las opciones actuales
             unidadSelect.innerHTML = "";
-
+            
             if (cliente === "NATURAL") {
                 unidadSelect.innerHTML += '<option value="DOCENA">Docena</option>';
                 unidadSelect.innerHTML += '<option value="CUBETA">Cubeta</option>';
@@ -48,57 +207,72 @@
                 unidadSelect.innerHTML += '<option value="CUBETA">Cubeta</option>';
             }
         }
+        
+        window.onload = actualizarOpciones;
     </script>
 </head>
 <body>
-    <h1>Realizar Venta</h1>
+    <div class="card">
+        <h1>VENTA DE HUEVOS</h1>
 
-    <form method="POST" action="/venta">
-        <label for="tipo">Tipo de huevo:</label>
-        <select name="tipo" required>
-            <option value="ROJO">ROJO</option>
-            <option value="BLANCO">BLANCO</option>
-        </select><br>
+        <form method="POST" action="/venta">
+            <div class="form-group">
+                <label for="tipo">Tipo de huevo:</label>
+                <select name="tipo" id="tipo" required>
+                    <option value="ROJO">ROJO</option>
+                    <option value="BLANCO">BLANCO</option>
+                </select>
+            </div>
 
-        <label for="tamano">Tamaño:</label>
-        <select name="tamano" required>
-            <option value="A">A</option>
-            <option value="AA">AA</option>
-            <option value="B">B</option>
-            <option value="EXTRA">EXTRA</option>
-        </select><br>
+            <div class="form-group">
+                <label for="tamano">Tamaño:</label>
+                <select name="tamano" id="tamano" required>
+                    <option value="A">A</option>
+                    <option value="AA">AA</option>
+                    <option value="B">B</option>
+                    <option value="EXTRA">EXTRA</option>
+                </select>
+            </div>
 
-        <label for="cliente">Cliente:</label>
-        <select name="cliente" onchange="actualizarOpciones()" required>
-            <option value="NATURAL">NATURAL</option>
-            <option value="JURIDICO">JURIDICO</option>
-        </select><br>
+            <div class="form-group">
+                <label for="cliente">Cliente:</label>
+                <select name="cliente" id="cliente" onchange="actualizarOpciones()" required>
+                    <option value="NATURAL">NATURAL</option>
+                    <option value="JURIDICO">JURIDICO</option>
+                </select>
+            </div>
 
-        <label for="unidad">Unidad:</label>
-        <select id="unidad" name="unidad" required>
-            <!-- Las opciones se actualizarán dinámicamente con JavaScript -->
-        </select><br>
+            <div class="form-group">
+                <label for="unidad">Unidad:</label>
+                <select id="unidad" name="unidad" required></select>
+            </div>
 
-        <label for="cantidad">Cantidad:</label>
-        <input type="number" name="cantidad" min="1" required><br>
+            <div class="form-group">
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" name="cantidad" id="cantidad" min="1" required>
+            </div>
 
-        <button type="submit">Realizar Venta</button>
-    </form>
+            <button type="submit" class="btn">Realizar Venta</button>
+            <a href="/" class="btn btn-secondary">Volver al inicio</a>
+        </form>
 
-    {% if archivo_pdf %}
-        <p>Factura generada:</p>
-        <a href="/factura/{{ archivo_pdf }}" target="_blank">Ver factura en PDF</a><br>
-    {% endif %}
+        {% if archivo_pdf or archivo_txt %}
+        <div class="factura-links">
+            <p style="font-size: 0.9rem; margin-bottom: 8px;">Factura generada:</p>
+            {% if archivo_pdf %}
+                <a href="/factura/{{ archivo_pdf }}" class="factura-link" target="_blank">PDF</a>
+            {% endif %}
+            {% if archivo_txt %}
+                <a href="/factura/{{ archivo_txt }}" class="factura-link" target="_blank">TXT</a>
+            {% endif %}
+        </div>
+        {% endif %}
 
-    {% if archivo_txt %}
-        <a href="/factura/{{ archivo_txt }}" target="_blank">Ver factura en TXT</a>
-    {% endif %}
-
-    {% if mensaje %}
-        <div class="mensaje">{{ mensaje }}</div>
-    {% endif %}
-
-    <br><br>
-    <a href="/">Volver al inicio</a>
+        {% if mensaje %}
+            <div class="mensaje {% if 'error' in mensaje|lower %}error{% else %}success{% endif %}">
+                {{ mensaje }}
+            </div>
+        {% endif %}
+    </div>
 </body>
 </html>
